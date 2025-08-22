@@ -4,18 +4,9 @@ This repository contains a Node.js application with a PostgreSQL database, Redis
 
 ---
 
-## Table of Contents
-
-1. [Running the App](#running-the-app)  
-2. [Environment Variables](#environment-variables)  
-3. [CI/CD Pipeline](#cicd-pipeline)  
-4. [Monitoring & Grafana](#monitoring--grafana)  
-5. [Credentials & Ports](#credentials--ports)  
-
----
-
 ## Running the App
 
+Before all rename .env.example to .env and change login and pass for redis and other service for yourself dosss
 You can run the application and all services with Docker Compose:
 
 ```bash
