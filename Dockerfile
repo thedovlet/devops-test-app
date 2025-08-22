@@ -1,15 +1,15 @@
-# Stage 1: build
+#step 1: build
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install --omit=dev
 COPY . .
 
-# Stage 2: runtime
+#step 2: runtime
 FROM node:18-alpine
 WORKDIR /app
 
-# Устанавливаем curl
+#fix bug with curl healthcheck
 RUN apk add --no-cache curl
 
 COPY --from=builder /app ./
