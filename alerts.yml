@@ -1,0 +1,23 @@
+#groups:
+#  - name: example
+#    rules:
+#      - alert: HighResponseTime
+#        expr: histogram_quantile(0.95, sum(rate(http_request_duration_ms_bucket[5m])) by (le)) > 1
+#        for: 5m
+#        labels:
+#          severity: warning
+#        annotations:
+#          summary: "Response time > 1s"
+#          description: "Response time for {{ $labels.route }} is higher than 1s for 5 minutes."
+
+groups:
+  - name: app-alerts
+    rules:
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_ms_bucket[5m])) by (le)) > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time"
+          description: "95th percentile response time is above 1s for the last 5 minutes"
