@@ -43,17 +43,17 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/getting-started-app:latest
 
-    deploy:
-      needs: docker-build-and-push
-      runs-on: self-hosted
-      steps:
-        - name: SSH to local/deploy machine
-          uses: appleboy/ssh-action@v0.1.7
-          with:
-            host: ${{ secrets.DEPLOY_HOST }}
-            username: ${{ secrets.DEPLOY_USER }}
-            key: ${{ secrets.DEPLOY_KEY }}
-            script: |
-              cd ~/getting-started-app
-              docker-compose pull
-              docker-compose up -d
+  deploy:
+    needs: docker-build-and-push
+    runs-on: self-hosted
+    steps:
+      - name: SSH to local/deploy machine
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            cd ~/getting-started-app
+            docker-compose pull
+            docker-compose up -d
